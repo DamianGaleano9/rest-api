@@ -1,9 +1,9 @@
-import {Router} from "express";
+import { Router } from "express";
 
 const router= Router();
 
-router.get("/", (request, response) => {
-    response.send("ShoesApp")
+router.get("/", (req, res) => {
+    response.send("ShoesApp Jordan")
 });
 
 
