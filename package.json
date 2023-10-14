@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "babel-node": "babel-node --presets=@babel/preset-env",
+    "dev": "nodemon --exec npm run babel-node src/index.js"
   },
   "keywords": [],
   "author": "Damian Galeano <dj.damian.b@hotmail.com> (https://www.npmjs.com/~damiangaleano)",
@@ -19,6 +20,7 @@
     "@babel/core": "^7.23.2",
     "@babel/node": "^7.22.19",
     "@babel/preset-env": "^7.23.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
   }
 }
