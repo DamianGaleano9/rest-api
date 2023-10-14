@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run babel-node src/index.js",
     "babel-node": "babel-node --presets=@babel/preset-env",
-    "dev": "nodemon --exec npm run babel-node src/index.js"
+    "dev": "nodemon --exec npm run start"
   },
   "keywords": [],
   "author": "Damian Galeano <dj.damian.b@hotmail.com> (https://www.npmjs.com/~damiangaleano)",
