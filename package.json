@@ -1,5 +1,5 @@
 {
-  "name": "rest-Api",
+  "name": "rest-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,17 @@
   },
   "keywords": [],
   "author": "Damian Galeano <dj.damian.b@hotmail.com> (https://www.npmjs.com/~damiangaleano)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "promise-mysql": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.23.2",
+    "morgan": "^1.10.0"
+  }
 }
