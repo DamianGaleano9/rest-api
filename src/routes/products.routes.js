@@ -1,10 +1,9 @@
 import { Router } from "express";
+import { methods as ProductsControllers } from "../controllers/products.controllers";
 
 const router= Router();
 
-router.get("/", (req, res) => {
-    response.send("ShoesApp Jordan")
-});
+router.get("/", ProductsControllers.getProducts)
 
 
 

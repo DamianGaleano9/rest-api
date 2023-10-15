@@ -17,6 +17,6 @@ app.use(morgan("dev"));
 
 // Routes
 
-app.use(ProductsRoute)
+app.use("/api/products" , ProductsRoute)
 
 export default app;
