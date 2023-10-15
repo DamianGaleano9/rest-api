@@ -1,8 +1,12 @@
+import { getConnection} from "../database/database";
 
 
-
-const getProducts = (req, res) => {
-    res.json("ShoesApp - Collections")
+const getProducts = async(req, res) => {
+    const connection = await getConnection();
+    const result = await connection.query("SELECT * FROM products");
+    console.log(result);
+    res.json(result);
+    
 };
 
 
