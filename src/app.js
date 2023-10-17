@@ -17,6 +17,6 @@ app.use(express.json());
 
 // Routes
 
-app.use("/api/products" , ProductsRoute)
+app.use("/api/products", ProductsRoute)
 
 export default app;

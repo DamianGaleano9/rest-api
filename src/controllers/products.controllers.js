@@ -1,5 +1,7 @@
 import { getConnection } from "../database/database";
 
+// GET
+
 
 const getProducts = async (req, res) => {
 
@@ -14,6 +16,9 @@ const getProducts = async (req, res) => {
     }
 };
 
+
+
+// GET SINGLE PRODUCT 
 
 const getProduct = async (req, res) => {
 
@@ -32,14 +37,13 @@ const getProduct = async (req, res) => {
 };
 
 
-
-
+// ADD PRODUCT
 
 const addProducts = async (req, res) => {
 
     try {
 
-        const { products_name, products_price, products_description, products_img, products_stock } = req.body; 
+        const { products_name, products_price, products_description, products_img, products_stock } = req.body;
 
         if (products_name === undefined || products_price === undefined || products_description === undefined || products_img === undefined || products_stock === undefined) {
             res.status(400).json({ message: "Bad Request. Please check your request" })
@@ -59,6 +63,8 @@ const addProducts = async (req, res) => {
 };
 
 
+// DELETE PRODUCT
+
 const deleteProduct = async (req, res) => {
 
     try {
@@ -76,6 +82,8 @@ const deleteProduct = async (req, res) => {
 
 
 
+// UPDATE PRODUCT 
+
 const updateProduct = async (req, res) => {
 
     try {
@@ -87,7 +95,7 @@ const updateProduct = async (req, res) => {
         }
 
         const product = { products_id, products_name, products_price, products_description, products_img, products_stock };
-        
+
         const connection = await getConnection();
         const result = await connection.query("UPDATE products SET ? WHERE products_id = ?", [product, products_id]);
         res.json(result);
@@ -97,12 +105,6 @@ const updateProduct = async (req, res) => {
         res.send(err.message);
     }
 };
-
-
-
-
-
-
 
 
 export const methods = {
