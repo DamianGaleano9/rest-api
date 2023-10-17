@@ -3,7 +3,9 @@ import { methods as ProductsControllers } from "../controllers/products.controll
 
 const router= Router();
 
-router.get("/", ProductsControllers.getProducts)
+router.get("/", ProductsControllers.getProducts);
+router.post("/", ProductsControllers.addProducts);
+
 
 
 
