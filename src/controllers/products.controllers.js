@@ -70,8 +70,29 @@ const addProducts = async (req, res) => {
 };
 
 
+
+const deleteProduct = async (req, res) => {
+
+    try {
+
+        console.log(req.params);
+        const { products_id } = req.params
+        const connection = await getConnection();
+        const result = await connection.query("DELETE FROM products WHERE products_id= ?", products_id);
+        res.json(result);
+
+    } catch (err) {
+        res.status(500)
+        res.send(err.message);
+    }
+
+
+};
+
+
 export const methods = {
     getProducts,
     addProducts,
-    getProduct
+    getProduct,
+    deleteProduct
 }
