@@ -1,6 +1,6 @@
 import { getConnection } from "../database/database";
 
-// GET
+// GET PRODUCT 
 
 
 const getProducts = async (req, res) => {
@@ -113,4 +113,5 @@ export const methods = {
     getProduct,
     updateProduct,
     deleteProduct,
+
 }
