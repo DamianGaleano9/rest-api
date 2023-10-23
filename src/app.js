@@ -7,6 +7,7 @@ import UsersRoute from "./routes/users.routes";
 
 
 const app = express();
+const cors = require('cors'); 
 
 
 // Settings
@@ -16,8 +17,7 @@ app.set("port", 4000);
 // Middlewares 
 app.use(morgan("dev"));
 app.use(express.json());
-
-// Routes
+app.use(cors());
 
 app.use("/api/products", ProductsRoute)
 app.use("/api/users", UsersRoute)
