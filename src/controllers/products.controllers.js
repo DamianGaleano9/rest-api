@@ -4,10 +4,17 @@ import { getConnection } from "../database/database";
 
 
 const getProducts = async (req, res) => {
-
     try {
         const connection = await getConnection();
-        const result = await connection.query("SELECT * FROM products");
+        const result = await connection.query(`
+            SELECT products_name, products_description, products_id, products_img, products_price, products_stock
+            FROM products
+            WHERE (products_name, products_id) IN (
+                SELECT products_name, MAX(products_id) AS max_id
+                FROM products
+                GROUP BY products_name
+            )
+        `);
         res.json(result);
 
     } catch (err) {
@@ -32,7 +39,7 @@ const getProduct = async (req, res) => {
 
     } catch (err) {
         res.status(500)
-        res.send(err.message);
+        res.send(err.message);  
     }
 };
 
