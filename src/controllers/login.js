@@ -7,14 +7,17 @@ app.post('/login', (req, res) => {
     const password = req.body.users_password;
 
 
-    getConnection.query("SELECT * FROM users WHERE username (users_email, users_name, users_password) VALUES(?, ?, ?)", [email, username, password],
+    getConnection.query("SELECT * FROM users WHERE users_name = ? AND users_password = ?)", [users_name, users_password],
         (err, result) => {
-            if (result) {
-                res.send(result);
+            if (err) {
+                res.setEncoding({ err: err });
             } else {
-                res.send({ message: "ENTER CORRECT DETAILS" });
+                if (result.length > 0) {
+                    res.send(result);
+                } else {
+                    res.send({ message: "WRONG USERNAME" })
+                }
             }
         }
-
     )
 })
