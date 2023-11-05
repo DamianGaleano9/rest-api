@@ -7,7 +7,7 @@ app.post('/login', (req, res) => {
     const password = req.body.users_password;
 
 
-    getConnection.query("SELECT * FROM users WHERE users_name = ? AND users_password = ?)", [users_name, users_password],
+    getConnection.query("SELECT * FROM users WHERE users_name = ? AND users_password = ?)", [username, password],
         (err, result) => {
             if (err) {
                 res.setEncoding({ err: err });
