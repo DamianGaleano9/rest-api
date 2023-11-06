@@ -1,4 +1,6 @@
 import { getConnection } from '../database/database';
+// import express from 'express';
+
 
 // GET USER 
 
@@ -99,10 +101,54 @@ const updateUser = async (req, res) => {
 };
 
 
+
+const register = (req, res) => {
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const connection = getConnection();
+    connection.query("INSERT INTO users (users_name, users_email, users_password) VALUES (?, ?, ?)", [username, email, password], (err, result) => {
+        if (err) {
+            res.status(500).send({ err: err });
+        } else {
+            res.send(result);
+        }
+    });
+};
+
+
+const login = (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+  
+    const connection = getConnection();
+    connection.query("SELECT * FROM users WHERE users_name = ? AND password = ?", [username, password], (err, result) => {
+      if (err) {
+        res.status(500).send({ err: err });
+      } else {
+        if (result.length > 0) {
+          res.send(result);
+        } else {
+          res.send({ message: "WRONG USERNAME OR PASSWORD" });
+        }
+      }
+    });
+  };
+  
+
+ 
+
+// Exporta tus controladores
 export const methods = {
     getUsers,
     addUser,
     getUser,
     updateUser,
     deleteUser,
-}
+    register,
+    login
+};
+
+
+
