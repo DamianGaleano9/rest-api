@@ -41,7 +41,7 @@ const addUser = async (req, res) => {
 
         const { users_name, users_email, users_password } = req.body;
 
-        if (users_name === undefined || users_email === undefined || users_password === undefined ) {
+        if (users_name === undefined || users_email === undefined || users_password === undefined) {
             res.status(400).json({ message: "Bad Request. Please check your request" })
         }
 
@@ -84,11 +84,11 @@ const updateUser = async (req, res) => {
         const { users_id } = req.params
         const { users_name, users_email, users_password } = req.body
 
-        if (users_id === undefined || users_name === undefined || users_email === undefined || users_password === undefined ) {
+        if (users_id === undefined || users_name === undefined || users_email === undefined || users_password === undefined) {
             res.status(400).json({ message: "Bad Request. Please check your request" })
         }
 
-        const user = { users_id, users_name, users_email, users_password};
+        const user = { users_id, users_name, users_email, users_password };
 
         const connection = await getConnection();
         const result = await connection.query("UPDATE users SET ? WHERE users_id = ?", [user, users_id]);
@@ -102,42 +102,56 @@ const updateUser = async (req, res) => {
 
 
 
-const register = (req, res) => {
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = req.body.password;
+const register = async (req, res) => {
 
-    const connection = getConnection();
-    connection.query("INSERT INTO users (users_name, users_email, users_password) VALUES (?, ?, ?)", [username, email, password], (err, result) => {
-        if (err) {
-            res.status(500).send({ err: err });
-        } else {
-            res.send(result);
+    try {
+
+        const { users_name, users_email, users_password } = req.body;
+
+        if (users_name === undefined || users_email === undefined || users_password === undefined) {
+            res.status(400).json({ message: "Bad Request. Please check your request" })
         }
-    });
+
+        const connection = await getConnection();
+        const user = { users_name, users_email, users_password };
+        const result = await connection.query("INSERT INTO users SET ?", user);
+
+
+        res.json(result);
+
+    } catch (err) {
+        res.status(500)
+        res.send(err.message);
+    }
+};
+
+const login = async (req, res) => {
+
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
+
+        const connection = await getConnection();
+        const result = await connection.query("SELECT * FROM users WHERE users_name = ? AND users_password = ?", [username, password]);
+            if (result.length > 0) {
+                res.send({ message: "LOGGIN SUCCESSFULL" });
+            } else {
+                res.send({ message: "WRONG USERNAME OR PASSWORD" });
+            }
+        
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+
 };
 
 
-const login = (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-  
-    const connection = getConnection();
-    connection.query("SELECT * FROM users WHERE users_name = ? AND password = ?", [username, password], (err, result) => {
-      if (err) {
-        res.status(500).send({ err: err });
-      } else {
-        if (result.length > 0) {
-          res.send(result);
-        } else {
-          res.send({ message: "WRONG USERNAME OR PASSWORD" });
-        }
-      }
-    });
-  };
-  
 
- 
+
+
+
+
+
 
 // Exporta tus controladores
 export const methods = {
@@ -149,6 +163,3 @@ export const methods = {
     register,
     login
 };
-
-
-

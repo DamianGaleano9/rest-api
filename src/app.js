@@ -100,10 +100,10 @@ app.use(cors());
 
 app.use("/api/products", ProductsRoute)
 app.use("/api/users", UsersRoute)
+// app.use("/api/register", UsersRoute)
 
 
-// app.use("/api/register", RegisterRoute)
-// app.use("/api/login", LoginRoute)
+// app.use("/api/login", UsersRoute)
 
 
 
