@@ -11,7 +11,8 @@ const getProducts = async (req, res) => {
                 p1.products_description,
                 p1.products_id,
                 p1.products_url,
-                p1.products_price
+                p1.products_price,
+                p1.products_quanty
             FROM products p1
         `);
         res.json(result);
