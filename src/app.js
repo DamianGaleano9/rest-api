@@ -48,13 +48,13 @@ app.post("/api/checkout", async (req, res) => {
     console.log('probrando checkout');
     console.log(req.body);
     
-  const { id, amount } = req.body;
+  const { id, amount, products_id } = req.body;
 
   try {
     const payment = await stripe.paymentIntents.create({
       amount: amount,
       return_url: 'https://google.com',
-      description: 'Air jordan',
+      description: products_id,
       currency: "EUR",
       payment_method: id,
       payment_method_types: ['card'],
